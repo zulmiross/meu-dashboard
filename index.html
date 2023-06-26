@@ -1,11 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu DashBoard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <!-- FontAwesome 6.4.0-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <style type="text/css">
+
+    </style>
+
+
+    <script type="text/javascript">
+        //	window.addEventListener("resize", function() {
+        //		"use strict"; window.location.reload(); 
+        //	});
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+            /////// Prevent closing from click inside dropdown
+            document.querySelectorAll('.dropdown-menu').forEach(function (element) {
+                element.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                });
+            })
+
+
+
+            // make it as accordion for smaller screens
+            if (window.innerWidth < 992) {
+
+                // close all inner dropdowns when parent is closed
+                document.querySelectorAll('.navbar .dropdown').forEach(function (everydropdown) {
+                    everydropdown.addEventListener('hidden.bs.dropdown', function () {
+                        // after dropdown is hidden, then find all submenus
+                        this.querySelectorAll('.submenu').forEach(function (everysubmenu) {
+                            // hide every submenu as well
+                            everysubmenu.style.display = 'none';
+                        });
+                    })
+                });
+
+                document.querySelectorAll('.dropdown-menu a').forEach(function (element) {
+                    element.addEventListener('click', function (e) {
+
+                        let nextEl = this.nextElementSibling;
+                        if (nextEl && nextEl.classList.contains('submenu')) {
+                            // prevent opening link if link needs to open dropdown
+                            e.preventDefault();
+                            if (nextEl.style.display == 'block') {
+                                nextEl.style.display = 'none';
+                            } else {
+                                nextEl.style.display = 'block';
+                            }
+
+                        }
+                    });
+                })
+            }
+            // end if innerWidth
+
+            $('#navbarMenu').on('click', function (e) {
+                e.preventDefault();
+                $('#navbarsExampleDefault').toggleClass('open')
+            })
+
+        });
+                // DOMContentLoaded  end
+    </script>
 </head>
-<body>
-    
+
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Admin-Dashboard</a>
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <button class="navbar-menu p-0 border-0" type="button" id="navbarMenu" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav">
+                    <li class="nav-item active"> <a class="nav-link" href="#">Home </a> </li>
+                    <li class="nav-item"><a class="nav-link" href="#"> About </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Treeview menu </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"> Dropdown item 1 </a></li>
+                            <li><a class="dropdown-item sub" href="#"> Dropdown item 2</a>
+                                <ul class="submenu dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Submenu item 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Submenu item 2</a></li>
+                                    <li><a class="dropdown-item sub" href="#">Submenu item 3</a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Multi level 1</a></li>
+                                            <li><a class="dropdown-item" href="#">Multi level 2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Submenu item 4</a></li>
+                                    <li><a class="dropdown-item" href="#">Submenu item 5</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
+                            <li><a class="dropdown-item" href="#"> Dropdown item 4 </a>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center ms-auto">
+                    <div class="flex-shrink-0 dropdown">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
+                            id="dropdownNotifications" data-bs-toggle="dropdown" aria-expanded="true">
+                            <i class="fa-solid fa-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownNotifications"
+                            data-popper-placement="bottom-end"
+                            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(-111px, 34px, 0px);">
+                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex-shrink-0 dropdown">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser"
+                            data-bs-toggle="dropdown" aria-expanded="true">
+                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
+                                class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser"
+                            data-popper-placement="bottom-end"
+                            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(-111px, 34px, 0px);">
+                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+            <img class="me-3" src="/docs/5.0/assets/brand/bootstrap-logo-white.svg" alt="" width="48" height="38">
+            <div class="lh-1">
+                <h1 class="h6 mb-0 text-white lh-1">Bootstrap</h1>
+                <small>Since 2011</small>
+            </div>
+        </div>
+
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+            <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+            <div class="d-flex text-muted pt-3">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff"
+                        dy=".3em">32x32</text>
+                </svg>
+
+                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                    <strong class="d-block text-gray-dark">@username</strong>
+                    Some representative placeholder content, with some information about this user. Imagine this being
+                    some sort of status update, perhaps?
+                </p>
+            </div>
+            <div class="d-flex text-muted pt-3">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#e83e8c" /><text x="50%" y="50%" fill="#e83e8c"
+                        dy=".3em">32x32</text>
+                </svg>
+
+                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                    <strong class="d-block text-gray-dark">@username</strong>
+                    Some more representative placeholder content, related to this other user. Another status update,
+                    perhaps.
+                </p>
+            </div>
+            <div class="d-flex text-muted pt-3">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#6f42c1" /><text x="50%" y="50%" fill="#6f42c1"
+                        dy=".3em">32x32</text>
+                </svg>
+
+                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                    <strong class="d-block text-gray-dark">@username</strong>
+                    This user also gets some representative placeholder content. Maybe they did something interesting,
+                    and you really want to highlight this in the recent updates.
+                </p>
+            </div>
+            <small class="d-block text-end mt-3">
+                <a href="#">All updates</a>
+            </small>
+        </div>
+
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+            <h6 class="border-bottom pb-2 mb-0">Suggestions</h6>
+            <div class="d-flex text-muted pt-3">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff"
+                        dy=".3em">32x32</text>
+                </svg>
+
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                    <div class="d-flex justify-content-between">
+                        <strong class="text-gray-dark">Full Name</strong>
+                        <a href="#">Follow</a>
+                    </div>
+                    <span class="d-block">@username</span>
+                </div>
+            </div>
+            <div class="d-flex text-muted pt-3">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff"
+                        dy=".3em">32x32</text>
+                </svg>
+
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                    <div class="d-flex justify-content-between">
+                        <strong class="text-gray-dark">Full Name</strong>
+                        <a href="#">Follow</a>
+                    </div>
+                    <span class="d-block">@username</span>
+                </div>
+            </div>
+            <div class="d-flex text-muted pt-3">
+                <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff"
+                        dy=".3em">32x32</text>
+                </svg>
+
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                    <div class="d-flex justify-content-between">
+                        <strong class="text-gray-dark">Full Name</strong>
+                        <a href="#">Follow</a>
+                    </div>
+                    <span class="d-block">@username</span>
+                </div>
+            </div>
+            <small class="d-block text-end mt-3">
+                <a href="#">All suggestions</a>
+            </small>
+        </div>
+
+
+       
+    </main>
 </body>
+
+<!-- jQuery-->
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
+
+<script src="/assets/js/bootstrap/offcanvas.js"></script>
+
+
 </html>
